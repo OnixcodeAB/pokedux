@@ -3,12 +3,16 @@ import "../assets/styles/PokemonList.css";
 import React from "react";
 
 const PokemonList = ({ pokemon }) => {
-  
   return (
     <div className="pokemonList">
-      {pokemon.map((item) => {
-        return <PokemonCard item={item} key={item.name} />;
-      })}
+      {pokemon.map((pokemons) => (
+        <PokemonCard
+          key={pokemons.name}
+          name={pokemons.name}
+          image={pokemons.sprites.front_default}
+          abilities={pokemons.abilities}
+        />
+      ))}
     </div>
   );
 };
