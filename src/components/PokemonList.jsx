@@ -3,10 +3,11 @@ import "../assets/styles/PokemonList.css";
 import React from "react";
 
 const PokemonList = ({ pokemon }) => {
+  
   return (
     <div className="pokemonList">
       {pokemon.map((item) => {
-        return <PokemonCard item={item} key={item.id} />;
+        return <PokemonCard item={item} key={item.name} />;
       })}
     </div>
   );
