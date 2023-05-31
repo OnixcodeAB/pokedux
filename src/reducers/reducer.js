@@ -1,4 +1,4 @@
-import { SET_POKEMON, SET_POKEMON_DETAILS } from "../actions/types";
+import { SET_POKEMON } from "../actions/types";
 
 export const reducer = (state, action) => {
   switch (action.type) {

@@ -13,16 +13,10 @@ export const featuring = (store) => (next) => (action) => {
 };
 
 export const SortedNames = (store) => (next) => (action) => {
-  const sortNames = action.action.payload.map((poke) => poke.name).sort();
-
-  const namesUpdated = action.action.payload.map((poke, index) => ({
-    ...poke,
-    name: sortNames[index],
-  }));
-
+  const sortNames = action.payload;
+  sortNames.sort((a, b) => a.name.localeCompare(b.name));
   const update = {
     ...action,
-    action: {...action.action, payload: namesUpdated}
-  }
+  };
   next(update);
 };

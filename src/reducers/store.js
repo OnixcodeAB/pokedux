@@ -1,4 +1,5 @@
 import { applyMiddleware, compose, legacy_createStore } from "redux";
+import thunk from "redux-thunk";
 import { reducer } from "./reducer";
 import { logger, SortedNames } from "../middlewares";
 
@@ -6,9 +7,9 @@ const initialState = {
   pokemon: [],
 };
 
-const composeEnhancers = compose(
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-  applyMiddleware(logger, )
+const composeAlt = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const composeEnhancers = composeAlt(applyMiddleware(thunk, logger, SortedNames)
 );
 
 export const store = legacy_createStore(
