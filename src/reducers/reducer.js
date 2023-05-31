@@ -1,4 +1,4 @@
-import { SET_POKEMON } from "../actions/types";
+import { SET_POKEMON, SET_LOADING } from "../actions/types";
 
 export const reducer = (state, action) => {
   switch (action.type) {
@@ -7,7 +7,13 @@ export const reducer = (state, action) => {
         ...state,
         pokemon: action.payload,
       };
+
+    case SET_LOADING:
+      return {
+        ...state,
+        loading: action.payload,
+      };
     default:
-      return state;
+      return {...state};
   }
 };

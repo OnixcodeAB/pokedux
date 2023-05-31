@@ -13,10 +13,15 @@ export const featuring = (store) => (next) => (action) => {
 };
 
 export const SortedNames = (store) => (next) => (action) => {
-  const sortNames = action.payload;
-  sortNames.sort((a, b) => a.name.localeCompare(b.name));
-  const update = {
-    ...action,
-  };
-  next(update);
+  if (Array.isArray(action.payload)) {
+    const sortNames = action.payload; // Crea una copia del array para evitar mutaciones
+    sortNames.sort((a, b) => a.name.localeCompare(b.name));
+    const update = {
+      ...action,
+    };
+    //console.log(sortNames);
+    next(update);
+  } else {
+    next(action);
+  }
 };
