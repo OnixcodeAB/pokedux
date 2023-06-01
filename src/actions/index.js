@@ -1,5 +1,5 @@
 import { getPokemonDetails } from "../api";
-import { SET_POKEMON, SET_LOADING } from "./types";
+import { SET_POKEMON, SET_LOADING, SET_FAVORITE } from "./types";
 
 export const setPokemon = (payload) => ({
   type: SET_POKEMON,
@@ -9,6 +9,11 @@ export const setPokemon = (payload) => ({
 export const setLoading = (loading) => ({
   type: SET_LOADING,
   payload: loading,
+});
+
+export const setFavorite = (payload) => ({
+  type: SET_FAVORITE,
+  payload,
 });
 
 // Redux Thunk
