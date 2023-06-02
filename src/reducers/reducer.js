@@ -1,7 +1,13 @@
-import { SET_POKEMON, SET_LOADING, SET_FAVORITE } from "../actions/types";
+import { SET_POKEMON, SET_FAVORITE } from "../actions/types";
 import isEmpty from "../func/isEmpty";
+import { FromJS } from "immutable";
 
-export const reducer = (state, action) => {
+const initialState = FromJS({
+  pokemon: [],
+  favorite: [],
+});
+
+export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_POKEMON:
       return {
@@ -31,7 +37,7 @@ export const reducer = (state, action) => {
         };
       }
 
-    case SET_LOADING:
+/*     case SET_LOADING: */
       return {
         ...state,
         loading: action.payload,
