@@ -9,7 +9,6 @@ const composeEnhancers = composeAlt(
   applyMiddleware(thunk, logger, SortedNames)
 );
 
-export const store = legacy_createStore(
-  rootReducer,
-  composeEnhancers
-);
+const store = legacy_createStore(rootReducer, composeEnhancers);
+
+export default store;

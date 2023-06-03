@@ -1,8 +1,8 @@
 import { SET_POKEMON, SET_FAVORITE } from "../actions/types";
 import isEmpty from "../func/isEmpty";
-import { FromJS } from "immutable";
+import { fromJS, get, setIn } from "immutable";
 
-const initialState = FromJS({
+const initialState = fromJS({
   pokemon: [],
   favorite: [],
 });
@@ -10,38 +10,29 @@ const initialState = FromJS({
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_POKEMON:
-      return {
-        ...state,
-        pokemon: action.payload,
-      };
+      return setIn(state, ["pokemon"], action.payload);
 
     case SET_FAVORITE:
       const newElem = state.pokemon.find((elem) => elem.id === action.payload);
 
-      const CheckElem = state.favorite.find(
-        (elem) => elem.id === action.payload
-      );
+      const CheckElem = s;
 
       if (isEmpty(CheckElem)) {
-        return {
-          ...state,
-          favorite: [...state.favorite, newElem],
-        };
+        return state.updateIn(["favorite"], (favorite) => {
+          favorite.push(newElem);
+        });
       } else {
-        const filter = state.favorite.filter(
-          (elem) => elem.id !== action.payload
-        );
-        return {
-          ...state,
-          favorite: [filter],
-        };
+        const filter = state
+          .get("favorite")
+          .filter((elem) => elem.get("id") !== action.payload);
+        return state.setIn(["favorite"], filter);
       }
 
-/*     case SET_LOADING: */
-      return {
+    /*     case SET_LOADING: */
+    /*       return {
         ...state,
         loading: action.payload,
-      };
+      }; */
 
     default:
       return { ...state };
