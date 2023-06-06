@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "antd/dist/reset.css";
 import "./App.css";
 import { Col, Spin } from "antd";
@@ -12,8 +12,10 @@ import { getPokemonWithDetails, setLoading } from "./actions";
 function App() {
   const pokemon = useSelector((state) => state.getIn(["data", "pokemon"]));
   const Loading = useSelector((state) => state.getIn(["ui", "loading"]));
+ 
   const dispatch = useDispatch();
 
+  //console.log(pokemon);
   console.log(Loading);
 
   useEffect(() => {
@@ -24,7 +26,7 @@ function App() {
       dispatch(setLoading(false));
     };
     fetchPokemon();
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="App">

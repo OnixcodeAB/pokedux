@@ -1,6 +1,5 @@
 import { SET_POKEMON, SET_FAVORITE } from "../actions/types";
-import isEmpty from "../func/isEmpty";
-import { fromJS, get, setIn } from "immutable";
+import { List, fromJS, get, getIn, setIn } from "immutable";
 
 const initialState = fromJS({
   pokemon: [],
@@ -13,26 +12,26 @@ export const reducer = (state = initialState, action) => {
       return setIn(state, ["pokemon"], action.payload);
 
     case SET_FAVORITE:
-      const newElem = state.pokemon.find((elem) => elem.id === action.payload);
+      const pokemons = getIn(state, ["pokemon"]).find(
+        (elem) => elem.id === action.payload
+      );
+      console.log(pokemons);
 
-      const CheckElem = s;
+      const favoriteList = List(getIn(state, ["favorite"]));
+      const index = favoriteList.findIndex((f) => f.id === pokemons.id);
+      console.log(index);
 
-      if (isEmpty(CheckElem)) {
-        return state.updateIn(["favorite"], (favorite) => {
-          favorite.push(newElem);
-        });
+      if (index !== -1) {
+        // El pokemon no está en la lista de favoritos, agregarlo
+        const updatedFavorite = favoriteList.delete(index);
+        return setIn(state, ["favorite"], updatedFavorite);
       } else {
-        const filter = state
-          .get("favorite")
-          .filter((elem) => elem.get("id") !== action.payload);
-        return state.setIn(["favorite"], filter);
+        // El pokemon ya está en la lista de favoritos, eliminarlo
+        const updatedFavorite = favoriteList.push(
+          get(state, "pokemon").find((elem) => elem.id === action.payload)
+        );
+        return setIn(state, ["favorite"], updatedFavorite);
       }
-
-    /*     case SET_LOADING: */
-    /*       return {
-        ...state,
-        loading: action.payload,
-      }; */
 
     default:
       return { ...state };

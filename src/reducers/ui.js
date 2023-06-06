@@ -1,15 +1,14 @@
-import { fromJS, set, setIn } from "immutable";
+import {fromJS} from "immutable";
 import { SET_LOADING } from "../actions/types";
 
-const loadingState = fromJS({
+const initialState = fromJS({
   loading: false,
 });
 
-export const UIreducer = (state = loadingState, action) => {
-  switch (action.payload) {
+export const uiReducer = (state = initialState, action) => {
+  switch (action.type) {
     case SET_LOADING:
-      return setIn(state,["loading"], action.payload);
-
+      return state.setIn(["loading"], action.payload);
     default:
       return state;
   }
