@@ -5,9 +5,10 @@ import { setLoading } from "./uiSlices";
 const initialState = {
   pokemons: [],
   favorite: [],
+  search: [],
 };
 
-// function to set Pokmeon details in the state, 
+// function to set Pokmeon details in the state,
 export const fecthPokemosnWithDetails = createAsyncThunk(
   "data/fecthPokemosnWithDetails",
 
@@ -47,10 +48,17 @@ const dataSlice = createSlice({
         state.favorite = state.favorite.filter((f) => f.id !== action.payload);
       }
     },
+
+    setSearch: (state, action) => {
+      const serachArray = state.pokemons.filter((p) =>
+        p.name.includes(action.payload)
+      );
+      state.search = serachArray;
+    },
   },
 });
 
-export const { setPokemons, setFavorite } = dataSlice.actions;
+export const { setPokemons, setFavorite, setSearch } = dataSlice.actions;
 console.log(dataSlice);
 
 export default dataSlice.reducer;
