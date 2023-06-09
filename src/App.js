@@ -6,8 +6,6 @@ import { Col, Spin } from "antd";
 import Searcher from "./components/Searcher";
 import PokemonList from "./components/PokemonList";
 import logo from "./assets/image/logo.svg";
-import { getPokemon } from "./api";
-import { getPokemonWithDetails, setLoading } from "./actions";
 import { fecthPokemosnWithDetails } from "./slices/dataSlice";
 
 function App() {

@@ -7,6 +7,7 @@ const initialState = {
   favorite: [],
 };
 
+// function to set Pokmeon details in the state, 
 export const fecthPokemosnWithDetails = createAsyncThunk(
   "data/fecthPokemosnWithDetails",
 

@@ -1,6 +1,4 @@
 import { combineReducers } from "redux";
-//import { uiReducer  } from "./ui";
-//import { reducer } from "./reducer";
 import dataSlice from "../slices/dataSlice";
 import uiSlices from "../slices/uiSlices";
 
