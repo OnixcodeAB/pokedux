@@ -33,8 +33,18 @@ const dataSlice = createSlice({
     },
 
     setFavorite: (state, action) => {
-      const pokemon = produce()
-      return state.favorite = [state.pokemons[0]];
+      const newArray = state.pokemons.find((p) => p.id === action.payload);
+      const index = state.favorite.findIndex((f) => f.id === newArray.id);
+      //console.log(newArray);
+      //console.log(index);
+
+      if (index === -1) {
+        // El pokemon no esta en favorito, agrega a la lista
+        state.favorite.push(newArray);
+      } else {
+        // El pokemon esta en favorito, eliminar de la lista
+        state.favorite = state.favorite.filter((f) => f.id !== action.payload);
+      }
     },
   },
 });
